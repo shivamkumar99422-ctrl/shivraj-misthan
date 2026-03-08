@@ -150,6 +150,7 @@
         .cart-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 1px solid #eee;
         }
@@ -326,26 +327,18 @@
         // Cart Functionality
         let cart = [];
         
+        // Add to Cart
         function addToCart(name, price) {
             cart.push({ name, price });
             updateCart();
             alert(name + " added to cart!");
         }
         
+        // Update Cart Display
         function updateCart() {
             document.getElementById('cartCount').textContent = cart.length;
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
             
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p>Your cart is empty</p>';
-                cartTotal.textContent = '0';
-            } else {
-                cartItems.innerHTML = cart.map((item, index) => 
-                    `<div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>₹${item.price}</span>
-                        <button onclick="removeFromCart(${index})" style="color:red;border:none;background:none;cursor:pointer;">✕</button>
-                    </div>`
-                ).join('');
-                cartTotal.textContent = cart.reduce((sum, item) => sum + item.price,
+                cartItems.innerHTML = '<p>Your cart
