@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,7 @@
             --text: #333;
             --whatsapp: #25D366;
             --payment: #3b82f6;
+            --cart: #ff9a9e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,9 +26,36 @@
             text-align: center;
             color: white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         header h1 { font-size: 2.5rem; margin-bottom: 10px; }
         header p { font-size: 1.1rem; }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--cart);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cart-count {
+            background: white;
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
 
         /* Introduction Section */
         .intro-section {
@@ -84,13 +111,79 @@
             font-size: 0.9rem;
             transition: background 0.3s;
             flex: 1;
+            cursor: pointer;
+            border: none;
         }
         
         .btn-whatsapp { background-color: var(--whatsapp); color: white; }
         .btn-whatsapp:hover { background-color: #1ebc57; }
         
-        .btn-payment { background-color: var(--payment); color: white; }
-        .btn-payment:hover { background-color: #2563eb; }
+        .btn-cart { background-color: var(--cart); color: white; }
+        .btn-cart:hover { background-color: #ff8085; }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .cart-modal.active { display: flex; }
+        
+        .cart-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .cart-items { margin: 20px 0; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .delivery-form { margin-top: 20px; }
+        .delivery-form input, .delivery-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        
+        .btn-checkout {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .btn-close {
+            background: #ccc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
 
         /* Map Section */
         .map-section {
@@ -124,6 +217,11 @@
         <p>Authentic Indian Sweets & Snacks Since 1995</p>
     </header>
 
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+    </div>
+
     <!-- Introduction Section -->
     <div class="intro-section">
         <h2>Welcome to Our Sweet World</h2>
@@ -136,13 +234,13 @@
         <div class="menu-grid">
             <!-- Product 1 -->
             <div class="card">
-                <img src="https://cdn2.foodviva.com/static-content/food-images/desserts-sweets-recipes/kaju-katli/kaju-katli-1.jpg" alt="Kaju Katli" alt="Kaju Katli">
+                <img src="https://cdn2.foodviva.com/static-content/food-images/desserts-sweets-recipes/kaju-katli/kaju-katli-1.jpg" alt="Kaju Katli">
                 <div class="card-content">
                     <h3>Kaju Katli</h3>
                     <span class="price">₹800 / kg</span>
                     <div class="btn-group">
+                        <button class="btn btn-cart" onclick="addToCart('Kaju Katli', 800)">Add to Cart</button>
                         <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Kaju%20Katli" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                        <a href="upi://pay?pa=shivrajmisthan@upi&pn=Shivraj%20Misthan&am=800&cu=INR" class="btn btn-payment" target="_blank">Pay Online</a>
                     </div>
                 </div>
             </div>
@@ -154,8 +252,8 @@
                     <h3>Gulab Jamun</h3>
                     <span class="price">₹350 / kg</span>
                     <div class="btn-group">
+                        <button class="btn btn-cart" onclick="addToCart('Gulab Jamun', 350)">Add to Cart</button>
                         <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Gulab%20Jamun" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                        <a href="upi://pay?pa=shivrajmisthan@upi&pn=Shivraj%20Misthan&am=350&cu=INR" class="btn btn-payment" target="_blank">Pay Online</a>
                     </div>
                 </div>
             </div>
@@ -167,8 +265,8 @@
                     <h3>Rasgulla</h3>
                     <span class="price">₹300 / kg</span>
                     <div class="btn-group">
+                        <button class="btn btn-cart" onclick="addToCart('Rasgulla', 300)">Add to Cart</button>
                         <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Rasgulla" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                        <a href="upi://pay?pa=shivrajmisthan@upi&pn=Shivraj%20Misthan&am=300&cu=INR" class="btn btn-payment" target="_blank">Pay Online</a>
                     </div>
                 </div>
             </div>
@@ -180,8 +278,8 @@
                     <h3>Hot Jalebi</h3>
                     <span class="price">₹250 / kg</span>
                     <div class="btn-group">
+                        <button class="btn btn-cart" onclick="addToCart('Hot Jalebi', 250)">Add to Cart</button>
                         <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Jalebi" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                        <a href="upi://pay?pa=shivrajmisthan@upi&pn=Shivraj%20Misthan&am=250&cu=INR" class="btn btn-payment" target="_blank">Pay Online</a>
                     </div>
                 </div>
             </div>
@@ -196,10 +294,58 @@
         </div>
     </div>
 
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>🛒 Your Cart</h2>
+            <div class="cart-items" id="cartItems">
+                <p>Your cart is empty</p>
+            </div>
+            <div style="text-align: right; font-weight: bold; margin-top: 10px;">
+                Total: ₹<span id="cartTotal">0</span>
+            </div>
+            
+            <div class="delivery-form">
+                <h3>📍 Delivery Address</h3>
+                <input type="text" id="customerName" placeholder="Your Name">
+                <input type="tel" id="customerPhone" placeholder="Phone Number">
+                <textarea id="customerAddress" rows="3" placeholder="Full Delivery Address"></textarea>
+            </div>
+            
+            <button class="btn-checkout" onclick="checkout()">Proceed to Payment</button>
+            <button class="btn-close" onclick="toggleCart()">Close</button>
+        </div>
+    </div>
+
     <footer>
         <p>📞 Call Us: 9942242520</p>
         <p>&copy; 2026 Shivraj Misthan. All rights reserved.</p>
     </footer>
 
-</body>
-</html>
+    <script>
+        // Cart Functionality
+        let cart = [];
+        
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            alert(name + " added to cart!");
+        }
+        
+        function updateCart() {
+            document.getElementById('cartCount').textContent = cart.length;
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                cartTotal.textContent = '0';
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => 
+                    `<div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>₹${item.price}</span>
+                        <button onclick="removeFromCart(${index})" style="color:red;border:none;background:none;cursor:pointer;">✕</button>
+                    </div>`
+                ).join('');
+                cartTotal.textContent = cart.reduce((sum, item) => sum + item.price,
