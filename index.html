@@ -1,344 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivraj Misthan - Sweets & Snacks</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff6b6b;
-            --secondary: #ffe66d;
-            --bg: #fff9f9;
-            --text: #333;
-            --whatsapp: #25D366;
-            --payment: #3b82f6;
-            --cart: #ff9a9e;
-        }
+  <meta charset="UTF-8">
+  <title>AI Virtual Try-On</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); }
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            padding: 30px 20px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        header p { font-size: 1.1rem; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        /* Cart Icon */
-        .cart-icon {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--cart);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .cart-count {
-            background: white;
-            color: var(--primary);
-            padding: 5px 10px;
-            border-radius: 50%;
-            font-weight: bold;
-        }
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* Introduction Section */
-        .intro-section {
-            background: white;
-            padding: 50px 20px;
-            text-align: center;
-            margin: 30px auto;
-            max-width: 800px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .intro-section h2 { color: var(--primary); margin-bottom: 15px; }
-        .intro-section p { line-height: 1.8; color: #666; }
+    header {
+      padding: 20px 50px;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-        /* Menu Section */
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .section-title { text-align: center; margin-bottom: 30px; color: var(--primary); font-size: 2rem; }
-        
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+    .hero {
+      text-align: center;
+      margin-top: 30px;
+    }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover { transform: translateY(-5px); }
-        
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .card-content { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card h3 { color: var(--primary); margin-bottom: 10px; }
-        .price { font-size: 1.2rem; font-weight: bold; color: #555; margin-bottom: 15px; display: block; }
-        
-        .btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
-        
-        .btn {
-            padding: 10px 15px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.3s;
-            flex: 1;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-whatsapp { background-color: var(--whatsapp); color: white; }
-        .btn-whatsapp:hover { background-color: #1ebc57; }
-        
-        .btn-cart { background-color: var(--cart); color: white; }
-        .btn-cart:hover { background-color: #ff8085; }
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #22c55e, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        /* Cart Modal */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        .cart-modal.active { display: flex; }
-        
-        .cart-content {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .cart-items { margin: 20px 0; }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .delivery-form { margin-top: 20px; }
-        .delivery-form input, .delivery-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-        
-        .btn-checkout {
-            background: var(--primary);
-            color: white;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        
-        .btn-close {
-            background: #ccc;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    .hero p {
+      margin-top: 10px;
+      color: #cbd5f5;
+    }
 
-        /* Map Section */
-        .map-section {
-            margin: 50px auto;
-            text-align: center;
-            padding: 0 20px;
-        }
-        .map-container {
-            width: 100%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        iframe { width: 100%; height: 100%; border: 0; }
+    .container {
+      margin: auto;
+      width: 90%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    }
 
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-        }
-    </style>
+    .upload-box {
+      border: 2px dashed #38bdf8;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .upload-box:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    input {
+      display: none;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #22c55e;
+    }
+
+    .preview {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .preview img {
+      width: 48%;
+      border-radius: 10px;
+      border: 2px solid #38bdf8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>🍬 Shivraj Misthan</h1>
-        <p>Authentic Indian Sweets & Snacks Since 1995</p>
-    </header>
+<header>👕 AI Try-On Studio</header>
 
-    <!-- Cart Icon -->
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒 <span class="cart-count" id="cartCount">0</span>
-    </div>
+<div class="hero">
+  <h1>Try Clothes Virtually</h1>
+  <p>Upload your photo and outfit — see magic instantly</p>
+</div>
 
-    <!-- Introduction Section -->
-    <div class="intro-section">
-        <h2>Welcome to Our Sweet World</h2>
-        <p>At <strong>Shivraj Misthan</strong>, we believe that every celebration deserves a touch of sweetness. We use only the finest ingredients to craft traditional Indian sweets that melt in your mouth. Whether it's a festival, a wedding, or a simple craving, we are here to serve you with love and hygiene.</p>
-    </div>
+<div class="container">
 
-    <div class="container">
-        <h2 class="section-title">Our Special Sweets</h2>
-        
-        <div class="menu-grid">
-            <!-- Product 1 -->
-            <div class="card">
-                <img src="https://cdn2.foodviva.com/static-content/food-images/desserts-sweets-recipes/kaju-katli/kaju-katli-1.jpg" alt="Kaju Katli">
-                <div class="card-content">
-                    <h3>Kaju Katli</h3>
-                    <span class="price">₹800 / kg</span>
-                    <div class="btn-group">
-                        <button class="btn btn-cart" onclick="addToCart('Kaju Katli', 800)">Add to Cart</button>
-                        <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Kaju%20Katli" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
+  <label class="upload-box">
+    Upload Your Photo
+    <input type="file" id="person" accept="image/*">
+  </label>
 
-            <!-- Product 2 -->
-            <div class="card">
-                <img src="https://www.cadburydessertscorner.com/hs-fs/hubfs/dc-website-2022/articles/soft-gulab-jamun-recipe-for-raksha-bandhan-from-dough-to-syrup-all-you-need-to-know/soft-gulab-jamun-recipe-for-raksha-bandhan-from-dough-to-syrup-all-you-need-to-know.webp?width=1536&height=864&name=soft-gulab-jamun-recipe-for-raksha-bandhan-from-dough-to-syrup-all-you-need-to-know.webp" alt="Gulab Jamun">
-                <div class="card-content">
-                    <h3>Gulab Jamun</h3>
-                    <span class="price">₹350 / kg</span>
-                    <div class="btn-group">
-                        <button class="btn btn-cart" onclick="addToCart('Gulab Jamun', 350)">Add to Cart</button>
-                        <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Gulab%20Jamun" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
+  <label class="upload-box">
+    Upload Clothing Image
+    <input type="file" id="cloth" accept="image/*">
+  </label>
 
-            <!-- Product 3 -->
-            <div class="card">
-                <img src="https://www.awesomecuisine.com/wp-content/uploads/2014/10/rasgulla-500x500.jpg" alt="Rasgulla">
-                <div class="card-content">
-                    <h3>Rasgulla</h3>
-                    <span class="price">₹300 / kg</span>
-                    <div class="btn-group">
-                        <button class="btn btn-cart" onclick="addToCart('Rasgulla', 300)">Add to Cart</button>
-                        <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Rasgulla" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
+  <button class="btn" onclick="previewImages()">✨ Try Now</button>
 
-            <!-- Product 4 -->
-            <div class="card">
-                <img src="https://xantilicious.com/wp-content/uploads/2016/09/IMG_4120123-copy-1.jpg" alt="Jalebi">
-                <div class="card-content">
-                    <h3>Hot Jalebi</h3>
-                    <span class="price">₹250 / kg</span>
-                    <div class="btn-group">
-                        <button class="btn btn-cart" onclick="addToCart('Hot Jalebi', 250)">Add to Cart</button>
-                        <a href="https://wa.me/919942242520?text=I%20want%20to%20order%20Jalebi" class="btn btn-whatsapp" target="_blank">Order on WhatsApp</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="preview">
+    <img id="personPreview" src="" alt="">
+    <img id="clothPreview" src="" alt="">
+  </div>
 
-    <!-- Map Section -->
-    <div class="map-section">
-        <h2 class="section-title">Visit Our Shop</h2>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.066666666666!2d77.2!3d28.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzAwLjAiTiA3N8KwMTInMDAuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </div>
+</div>
 
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-content">
-            <h2>🛒 Your Cart</h2>
-            <div class="cart-items" id="cartItems">
-                <p>Your cart is empty</p>
-            </div>
-            <div style="text-align: right; font-weight: bold; margin-top: 10px;">
-                Total: ₹<span id="cartTotal">0</span>
-            </div>
-            
-            <div class="delivery-form">
-                <h3>📍 Delivery Address</h3>
-                <input type="text" id="customerName" placeholder="Your Name">
-                <input type="tel" id="customerPhone" placeholder="Phone Number">
-                <textarea id="customerAddress" rows="3" placeholder="Full Delivery Address"></textarea>
-            </div>
-            
-            <button class="btn-checkout" onclick="checkout()">Proceed to Payment</button>
-            <button class="btn-close" onclick="toggleCart()">Close</button>
-        </div>
-    </div>
+<footer>© 2026 AI Fashion | Premium Experience</footer>
 
-    <footer>
-        <p>📞 Call Us: 9942242520</p>
-        <p>&copy; 2026 Shivraj Misthan. All rights reserved.</p>
-    </footer>
+<script>
+function previewImages() {
+  const person = document.getElementById('person').files[0];
+  const cloth = document.getElementById('cloth').files[0];
 
-    <script>
-        // Cart Functionality
-        let cart = [];
-        
-        // Add to Cart
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCart();
-            alert(name + " added to cart!");
-        }
-        
-        // Update Cart Display
-        function updateCart() {
-            document.getElementById('cartCount').textContent = cart.length;
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p>Your cart
+  if (person) {
+    document.getElementById('personPreview').src = URL.createObjectURL(person);
+  }
+
+  if (cloth) {
+    document.getElementById('clothPreview').src = URL.createObjectURL(cloth);
+  }
+
+  alert("Next step: connect AI backend 🚀");
+}
+</script>
+
+</body>
+</html>
