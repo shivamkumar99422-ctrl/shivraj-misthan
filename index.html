@@ -6,8 +6,6 @@
 <title>Shivam Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<!-- AOS Animation -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -21,7 +19,6 @@
 body {
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: white;
-  scroll-behavior: smooth;
 }
 
 /* Navbar */
@@ -33,10 +30,6 @@ nav {
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
-}
-
-nav h1 {
-  font-size: 24px;
 }
 
 nav ul {
@@ -55,13 +48,17 @@ nav ul li:hover {
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
+  justify-content: space-around;
+  padding: 50px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 500px;
 }
 
 .hero h2 {
-  font-size: 60px;
+  font-size: 50px;
 }
 
 .glow {
@@ -70,51 +67,63 @@ nav ul li:hover {
   color: transparent;
 }
 
-.hero p {
-  margin: 20px 0;
+.typing {
   font-size: 20px;
+  margin-top: 10px;
+  color: #00d4ff;
 }
 
+.hero img {
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,212,255,0.5);
+}
+
+/* Button */
 .btn {
-  padding: 12px 35px;
+  margin-top: 20px;
+  padding: 12px 30px;
   border: none;
   border-radius: 30px;
   background: linear-gradient(90deg, #00d4ff, #00ffcc);
-  color: black;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #00d4ff;
 }
 
 /* Section */
 .section {
   padding: 80px 50px;
+  text-align: center;
+}
+
+.cards {
   display: flex;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
 }
 
-/* Cards */
+/* Card */
 .card {
   width: 280px;
-  padding: 30px;
-  border-radius: 20px;
+  padding: 20px;
+  border-radius: 15px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  transition: 0.4s;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-15px) scale(1.05);
-  box-shadow: 0 0 30px rgba(0,212,255,0.4);
+  transform: translateY(-10px) scale(1.05);
 }
 
-.card h3 {
+/* Project Image */
+.card img {
+  width: 100%;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
@@ -125,7 +134,6 @@ footer {
   opacity: 0.6;
 }
 </style>
-
 </head>
 
 <body>
@@ -134,48 +142,85 @@ footer {
   <h1>Shivam</h1>
   <ul>
     <li>Home</li>
-    <li>Skills</li>
+    <li>Projects</li>
     <li>Contact</li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <h2 data-aos="fade-up">Hi, I'm <span class="glow">Shivam</span></h2>
-  <p data-aos="fade-up" data-aos-delay="200">
-    Future Software Developer | AI/ML Enthusiast 🚀
-  </p>
-  <button class="btn" data-aos="zoom-in" data-aos-delay="400">
-    Get Started
-  </button>
+  <div class="hero-text" data-aos="fade-right">
+    <h2>Hi, I'm <span class="glow">Shivam</span></h2>
+    <div class="typing" id="typing"></div>
+    <button class="btn">Hire Me</button>
+  </div>
+
+  <img src="https://via.placeholder.com/300" alt="Your Photo" data-aos="fade-left">
 </div>
 
+<!-- PROJECTS -->
 <div class="section">
+  <h2 data-aos="fade-up">My Projects 🚀</h2>
 
-  <div class="card" data-aos="fade-up">
-    <h3>💻 Web Development</h3>
-    <p>Building modern, responsive and eye-catching websites.</p>
+  <div class="cards">
+
+    <div class="card" data-aos="fade-up">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Food Delivery App</h3>
+      <p>Android app with login system.</p>
+    </div>
+
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>AI Chatbot</h3>
+      <p>Smart chatbot using AI concepts.</p>
+    </div>
+
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Portfolio Website</h3>
+      <p>Modern personal portfolio.</p>
+    </div>
+
   </div>
-
-  <div class="card" data-aos="fade-up" data-aos-delay="200">
-    <h3>🤖 AI/ML</h3>
-    <p>Exploring artificial intelligence and machine learning.</p>
-  </div>
-
-  <div class="card" data-aos="fade-up" data-aos-delay="400">
-    <h3>🚀 Projects</h3>
-    <p>Working on real-world applications and ideas.</p>
-  </div>
-
 </div>
 
 <footer>
-  © 2026 Shivam | Designed like a pro 😎
+  © 2026 Shivam | Portfolio 🔥
 </footer>
 
-<!-- AOS Script -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  AOS.init();
+AOS.init();
+
+/* Typing Effect */
+const text = ["Web Developer 💻", "AI/ML Learner 🤖", "Future Engineer 🚀"];
+let i = 0, j = 0;
+let currentText = "";
+let isDeleting = false;
+
+function type() {
+  currentText = text[i];
+
+  if (!isDeleting) {
+    document.getElementById("typing").innerHTML = currentText.substring(0, j++);
+    if (j > currentText.length) {
+      isDeleting = true;
+      setTimeout(type, 1000);
+      return;
+    }
+  } else {
+    document.getElementById("typing").innerHTML = currentText.substring(0, j--);
+    if (j == 0) {
+      isDeleting = false;
+      i = (i + 1) % text.length;
+    }
+  }
+
+  setTimeout(type, isDeleting ? 50 : 100);
+}
+
+type();
 </script>
 
 </body>
