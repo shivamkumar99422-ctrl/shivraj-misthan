@@ -3,135 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Portfolio</title>
+<title>Shivam | Developer Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+* { margin:0; padding:0; box-sizing:border-box; font-family:Poppins; }
 
 body {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: #0f172a;
   color: white;
 }
 
-/* Navbar */
+/* NAVBAR */
 nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 50px;
+  display:flex;
+  justify-content:space-between;
+  padding:20px 50px;
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
   position: sticky;
-  top: 0;
+  top:0;
 }
 
 nav ul {
-  display: flex;
-  gap: 25px;
-  list-style: none;
+  display:flex;
+  gap:20px;
+  list-style:none;
 }
 
-nav ul li:hover {
-  color: #00d4ff;
-  cursor: pointer;
-}
-
-/* Hero */
+/* HERO */
 .hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 50px;
-  flex-wrap: wrap;
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-.hero-text {
-  max-width: 500px;
+.hero h1 {
+  font-size:50px;
 }
 
-.hero h2 {
-  font-size: 50px;
-}
+.highlight { color:#00d4ff; }
 
-.glow {
-  background: linear-gradient(90deg, #00d4ff, #00ffcc);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.typing {
-  font-size: 20px;
-  margin-top: 10px;
-  color: #00d4ff;
-}
-
-.hero img {
-  width: 300px;
-  border-radius: 20px;
-  box-shadow: 0 0 30px rgba(0,212,255,0.5);
-}
-
-/* Button */
 .btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(90deg, #00d4ff, #00ffcc);
-  cursor: pointer;
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#00d4ff;
+  cursor:pointer;
 }
 
-.btn:hover {
-  transform: scale(1.1);
-}
-
-/* Section */
+/* SECTION */
 .section {
-  padding: 80px 50px;
-  text-align: center;
+  padding:60px 40px;
+  text-align:center;
 }
 
 .cards {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
-/* Card */
+/* CARD */
 .card {
-  width: 280px;
-  padding: 20px;
-  border-radius: 15px;
+  width:260px;
+  padding:20px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  transition: 0.3s;
+  border-radius:10px;
+  transition:0.3s;
 }
 
 .card:hover {
-  transform: translateY(-10px) scale(1.05);
+  transform: translateY(-10px);
 }
 
-/* Project Image */
-.card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+/* PROJECT */
+.card a {
+  color:#00d4ff;
+  text-decoration:none;
 }
 
-/* Footer */
+/* CONTACT */
+input, textarea {
+  width:80%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:5px;
+}
+
+button.send {
+  padding:10px 20px;
+  background:#00d4ff;
+  border:none;
+  cursor:pointer;
+}
+
+/* FOOTER */
 footer {
-  text-align: center;
-  padding: 20px;
-  opacity: 0.6;
+  text-align:center;
+  padding:20px;
+  opacity:0.6;
 }
 </style>
 </head>
@@ -139,9 +116,9 @@ footer {
 <body>
 
 <nav>
-  <h1>Shivam</h1>
+  <h2>Shivam</h2>
   <ul>
-    <li>Home</li>
+    <li>About</li>
     <li>Projects</li>
     <li>Contact</li>
   </ul>
@@ -149,78 +126,89 @@ footer {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-text" data-aos="fade-right">
-    <h2>Hi, I'm <span class="glow">Shivam</span></h2>
-    <div class="typing" id="typing"></div>
-    <button class="btn">Hire Me</button>
-  </div>
+  <h1>Hi, I'm <span class="highlight">Shivam</span></h1>
+  <p>Future Software Developer | AI/ML Enthusiast</p>
+  
+  <a href="#" download>
+    <button class="btn">Download Resume</button>
+  </a>
+</div>
 
-  <img src="https://via.placeholder.com/300" alt="Your Photo" data-aos="fade-left">
+<!-- ABOUT -->
+<div class="section">
+  <h2>About Me</h2>
+  <p>I am a B.Tech CSE student passionate about Web Development and AI/ML.  
+  I build modern websites and real-world projects.</p>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+  <h2>Skills</h2>
+  <div class="cards">
+    <div class="card">HTML, CSS, JS</div>
+    <div class="card">C++ / Python</div>
+    <div class="card">AI/ML Basics</div>
+  </div>
 </div>
 
 <!-- PROJECTS -->
 <div class="section">
-  <h2 data-aos="fade-up">My Projects 🚀</h2>
+  <h2>Projects</h2>
 
   <div class="cards">
 
-    <div class="card" data-aos="fade-up">
-      <img src="https://via.placeholder.com/300x200">
+    <div class="card">
       <h3>Food Delivery App</h3>
-      <p>Android app with login system.</p>
+      <p>Android app with login system</p>
+      <a href="#">View Project</a>
     </div>
 
-    <div class="card" data-aos="fade-up" data-aos-delay="200">
-      <img src="https://via.placeholder.com/300x200">
+    <div class="card">
       <h3>AI Chatbot</h3>
-      <p>Smart chatbot using AI concepts.</p>
+      <p>Basic AI chatbot project</p>
+      <a href="#">View Project</a>
     </div>
 
-    <div class="card" data-aos="fade-up" data-aos-delay="400">
-      <img src="https://via.placeholder.com/300x200">
+    <div class="card">
       <h3>Portfolio Website</h3>
-      <p>Modern personal portfolio.</p>
+      <p>Personal website</p>
+      <a href="#">View Project</a>
     </div>
 
   </div>
 </div>
 
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact Me</h2>
+
+  <input type="text" id="name" placeholder="Your Name"><br>
+  <input type="email" id="email" placeholder="Your Email"><br>
+  <textarea id="message" placeholder="Your Message"></textarea><br>
+
+  <button class="send" onclick="sendEmail()">Send</button>
+</div>
+
 <footer>
-  © 2026 Shivam | Portfolio 🔥
+  © 2026 Shivam | Placement Ready Portfolio 🚀
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <script>
-AOS.init();
+(function(){
+emailjs.init("YOUR_PUBLIC_KEY"); // replace this
+})();
 
-/* Typing Effect */
-const text = ["Web Developer 💻", "AI/ML Learner 🤖", "Future Engineer 🚀"];
-let i = 0, j = 0;
-let currentText = "";
-let isDeleting = false;
-
-function type() {
-  currentText = text[i];
-
-  if (!isDeleting) {
-    document.getElementById("typing").innerHTML = currentText.substring(0, j++);
-    if (j > currentText.length) {
-      isDeleting = true;
-      setTimeout(type, 1000);
-      return;
-    }
-  } else {
-    document.getElementById("typing").innerHTML = currentText.substring(0, j--);
-    if (j == 0) {
-      isDeleting = false;
-      i = (i + 1) % text.length;
-    }
-  }
-
-  setTimeout(type, isDeleting ? 50 : 100);
+function sendEmail() {
+  emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+    from_name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    message: document.getElementById("message").value,
+  }).then(()=>{
+    alert("Message Sent Successfully!");
+  });
 }
-
-type();
 </script>
 
 </body>
